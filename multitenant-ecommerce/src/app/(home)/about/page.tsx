@@ -12,7 +12,7 @@ const Page = () => {
         <div className="flex flex-col items-center-safe text-center py-10">
             <span className={cn("text-5xl", poppins.className)}>OUR GOAL</span>
             <span className={cn("text-2xl space-y-2 py-2 px-16", poppins.className)}>
-                In the original creation of 'curation.', we aimed to develop a site where 
+                In the original creation of curation., we aimed to develop a site where 
                 people can track their tastes. Personally, I wanted to create a list of songs
                 that I know how to play on the guitar. As someone with poor memory that is
                 learning to play the guitar, a list of songs that I can play would serve as 
