@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Poppins } from "next/font/google"; 
+import { Roboto_Condensed } from "next/font/google"; 
 import Link from "next/link";
 import { useState } from "react";
 import { NavbarSidebar } from "./navbar-sidebar";
 import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
 
-const poppins = Poppins({
+const poppins = Roboto_Condensed({
     subsets: ["latin"],
     weight: ["700"]
 });
@@ -43,9 +43,9 @@ const NavbarItem = ({
 const navbarItems = [
     { href: "/", children: "Home" },
     { href: "/about", children: "About" },
-    { href: "/features", children: "Features" },
-    { href: "/pricing", children: "Pricing" },
-    { href: "/contact", children: "Contact" },
+    { href: "/discover", children: "Discover" },
+    { href: "/mylists", children: "My Lists" },
+    { href: "/account", children: "Account" },
 ]
 
 export const Navbar = () => {
@@ -56,7 +56,7 @@ export const Navbar = () => {
         <nav className="h-20 flex border-b justify-between font-medium bg-white">
             <Link href="/" className="pl-6 flex items-center">
                 <span className={cn("text-5xl font-semibold", poppins.className)}>
-                    funroad
+                    curation.
                 </span>
             </Link>
 
@@ -93,7 +93,7 @@ export const Navbar = () => {
                     className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
                 >
                     <Link href="/sign-up">
-                        Start Selling
+                        Sign Up
                     </Link>
                 </Button>
             </div>

@@ -1,11 +1,11 @@
 const Page = () => {
     return (
         <div>
-            Pricing Page
+            Log in to view account info
         </div>
     );
 };
 
 export default Page;
 
-// ./pricing
+// ./account

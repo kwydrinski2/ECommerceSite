@@ -120,3 +120,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.app {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.app:hover {
+  transform: scale(1.1);
+  background: linear-gradient(rgba(0, 172, 120, 0.577), rgba(92, 0, 172, 0.577));
+  -webkit-background-clip: text;
+  color: transparent;
+}
