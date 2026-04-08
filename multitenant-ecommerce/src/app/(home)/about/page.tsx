@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Roboto_Condensed } from "next/font/google";
@@ -18,13 +19,16 @@ const Page = () => {
                 learning to play the guitar, a list of songs that I can play would serve as 
                 a great source of motivation. We also thought about how cool sharing spotify
                 wrapped is with our friends, so something like that would be enjoyable year 
-                round. 
+                round. In the future, we hope to expand and allow you to create more lists, 
+                search for your favorite songs, and share your lists with friends!
             </span>
-
-            <span className={cn("text-4xl space-y-2 py-2 mt-30", poppins.className)}>
-                Contact Us
-            </span>
-            <Textarea placeholder="Your Message Here" className="w-200 h-25"></Textarea>
+            <div className="mt-20 space-y-2"> 
+                <span className={cn("text-4xl", poppins.className)}>
+                    Contact Us
+                </span>
+                <Textarea placeholder="Your Message Here" className="w-200 h-25"></Textarea>
+                <Button variant="default" className="p-5 app">send</Button>
+            </div>
         </div>
     );
 };

@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { Roboto_Condensed } from "next/font/google"; 
 import Link from "next/link";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { NavbarSidebar } from "./navbar-sidebar";
 import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
@@ -45,12 +47,35 @@ const navbarItems = [
     { href: "/about", children: "About" },
     { href: "/discover", children: "Discover" },
     { href: "/mylists", children: "My Lists" },
-    { href: "/account", children: "Account" },
 ]
 
 export const Navbar = () => {
     const pathname = usePathname();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [user, setUser] = useState<{ username: string } | null>(null);
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setUser(null);
+        router.push("/");
+    };
+
+    useEffect(() => {
+        const loadUser = () => {
+            const storedUser = localStorage.getItem("user");
+            setUser(storedUser ? JSON.parse(storedUser) : null);
+        };
+
+        loadUser(); // run on mount
+
+        window.addEventListener("authChange", loadUser);
+
+        return () => {
+            window.removeEventListener("authChange", loadUser);
+        };
+    }, []);
 
     return (
         <nav className="h-20 flex border-b justify-between font-medium bg-white">
@@ -78,24 +103,42 @@ export const Navbar = () => {
                 ))}
             </div>
 
-            <div className="hidden lg:flex">
-                <Button
-                    asChild
-                    variant="secondary"
-                    className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-pink-400 transition-colors text-lg"
-                >
-                    <Link href="/sign-in">
-                        Log In
-                    </Link>
-                </Button>
-                <Button
-                    asChild
-                    className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
-                >
-                    <Link href="/sign-up">
-                        Sign Up
-                    </Link>
-                </Button>
+            <div className="hidden lg:flex items-center">
+                {user ? (
+                    <>
+                        <span className="px-6 text-lg">
+                            {user.username}
+                        </span>
+
+                        <Button
+                            onClick={handleLogout}
+                            className="px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
+                        >
+                            Log Out
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <Button
+                            asChild
+                            variant="secondary"
+                            className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-pink-400 transition-colors text-lg"
+                        >
+                            <Link href="/sign-in">
+                                Log In
+                            </Link>
+                        </Button>
+
+                        <Button
+                            asChild
+                            className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-black text-white hover:bg-pink-400 hover:text-black transition-colors text-lg"
+                        >
+                            <Link href="/sign-up">
+                                Sign Up
+                            </Link>
+                        </Button>
+                    </>
+                )}
             </div>
 
             <div className="flex lg:hidden items-center justify-center">
